@@ -1,3 +1,5 @@
+import DayInfoComponent from "./components/DayInfoComponent";
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -29,12 +31,12 @@ const router = new Router({
         {path:'/', component:TodoComponent},
         {path:'/complete', component:CompleteComponent},
         {path:'/calendar', component:CalendarComponent},
+        {path:'/day', component:DayInfoComponent},
     ]
 });
 
 Date.prototype.gondr = function() {
     let str = this.toLocaleDateString();
-    console.log(str);
     let arr = str.split(".");
     return arr.filter(x => x != "").map(x => {
         if(x.length >= 4) return x;
@@ -69,8 +71,11 @@ const app = new Vue({
         day : new Date(),
         id:4,
         user:null,
+        now: null,
+        dayInfo: null,
     },
     created(){
+        this.now = new Date();
         this.$http.get('/check')
             .then(res => {
                 if(res.data.result) {
@@ -111,6 +116,8 @@ const app = new Vue({
                 id:id
             });
         },
+
+
         selectdate(today){
             this.date  = [];
             let week = [];

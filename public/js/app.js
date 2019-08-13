@@ -1727,6 +1727,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CalendarComponent",
   created: function created() {
@@ -1803,11 +1810,14 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      console.log(result);
       return result;
     },
     "null": function _null() {
       return null;
+    },
+    setDate: function setDate(item) {
+      this.$root.now = new Date(item.date);
+      this.$root.dayInfo.dateTodo();
     }
   },
   computed: {
@@ -1909,6 +1919,90 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     dayList: function dayList() {
       return this.item;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DayInfoComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DayInfoComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "DayInfoComponent",
+  created: function created() {
+    this.now = new Date();
+    this.date = new Date();
+    this.$root.dayInfo = this;
+  },
+  data: function data() {
+    return {
+      now: null,
+      date: null
+    };
+  },
+  methods: {
+    prev: function prev() {
+      this.$root.now = new Date(this.$root.now.getFullYear(), this.$root.now.getMonth(), this.$root.now.getDate() - 1);
+      this.dateTodo();
+    },
+    next: function next() {
+      this.$root.now = new Date(this.$root.now.getFullYear(), this.$root.now.getMonth(), this.$root.now.getDate() + 1);
+      this.dateTodo();
+    },
+    dateTodo: function dateTodo() {
+      var _this = this;
+
+      this.$root.list = [];
+      this.$http.get("/todo").then(function (res) {
+        var data = res.data;
+        data.list.forEach(function (x) {
+          if (_this.newDate(x.date) == _this.$root.now.gondr()) {
+            _this.$root.list.push({
+              id: x.id,
+              name: x.name,
+              date: _this.newDate(x.date),
+              complete: x.complete
+            });
+          }
+        });
+      });
+    },
+    newDate: function newDate(date) {
+      this.date = new Date(date);
+      return this.date.gondr();
+    }
+  },
+  computed: {
+    uncomList: function uncomList() {
+      return this.$root.sortList.filter(function (x) {
+        return x.complete == 0;
+      });
     }
   }
 });
@@ -6676,7 +6770,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.day-row[data-v-56bbe5f8] {\n    display: grid;\n    grid-template-columns: repeat(7,1fr);\n    grid-template-rows: 40px;\n    grid-auto-rows: minmax(200px, auto);\n}\n.date-row[data-v-56bbe5f8] {\n    margin-top: 10px;\n    grid-gap: 10px;\n    display: grid;\n    grid-template-columns: repeat(7,1fr);\n    grid-auto-rows: minmax(100px, auto);\n}\n.today[data-v-56bbe5f8] {\n    display: flex;\n    justify-content: center;\n    width: 100%;\n    height: 50px;\n    text-align: center;\n    color:  #4caf50;\n    font-size: 40px;\n    position: relative;\n}\n.today > i[data-v-56bbe5f8]:first-child {\n    left: 0;\n}\n.today > i[data-v-56bbe5f8]:last-child {\n    right: 0;\n}\n.today > i[data-v-56bbe5f8] {\n    position: absolute;\n    line-height:50px;\n    cursor: pointer;\n    font-size: 50px;\n}\n.today > div[data-v-56bbe5f8] {\n    line-height:50px;\n}\n.day[data-v-56bbe5f8] {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background-color: #4caf50;\n    color: #fff;\n}\n.item[data-v-56bbe5f8] {\n    background-color: #fff;\n    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);\n    padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.day-row[data-v-56bbe5f8] {\n    display: grid;\n    grid-template-columns: repeat(7,1fr);\n    grid-template-rows: 40px;\n    grid-auto-rows: minmax(200px, auto);\n}\n.date-row[data-v-56bbe5f8] {\n    margin-top: 10px;\n    grid-gap: 10px;\n    display: grid;\n    grid-template-columns: repeat(7,1fr);\n    grid-auto-rows: minmax(100px, auto);\n}\n.today[data-v-56bbe5f8] {\n    display: flex;\n    justify-content: center;\n    width: 100%;\n    height: 50px;\n    text-align: center;\n    color:  #4caf50;\n    font-size: 40px;\n    position: relative;\n}\n.today > i[data-v-56bbe5f8]:first-child {\n    left: 0;\n}\n.today > i[data-v-56bbe5f8]:last-child {\n    right: 0;\n}\n.today > i[data-v-56bbe5f8] {\n    position: absolute;\n    line-height:50px;\n    cursor: pointer;\n    font-size: 50px;\n}\n.today > div[data-v-56bbe5f8] {\n    line-height:50px;\n}\n.day[data-v-56bbe5f8] {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background-color: #4caf50;\n    color: #fff;\n}\n.item[data-v-56bbe5f8] {\n    background-color: #fff;\n    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);\n    padding: 10px;\n}\n.item > div[data-v-56bbe5f8] {\n    width: 100%;\n    height: 100%;\n}\n", ""]);
 
 // exports
 
@@ -6696,6 +6790,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\ntd[data-v-29d997a8] {\n    width: 200px;\n    height: 100px;\n    border-left: 1px solid pink;\n    border-bottom: 1px solid pink;\n    text-align: center;\n    font-size: 40px;\n    font-family: 'Black Han Sans', sans-serif;\n    cursor: pointer;\n}\n.calendar > .dates > tr:first-child > td[data-v-29d997a8] {\n    cursor: default;\n}\n.calendar > .dates > tr > td[data-v-29d997a8]:last-child {\n    border-right: 1px solid pink;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.today[data-v-5c4db2c4] {\n    display: flex;\n    justify-content: center;\n    width: 100%;\n    height: 50px;\n    text-align: center;\n    color: #4caf50;\n    font-size: 40px;\n    position: relative;\n}\n.today > i[data-v-5c4db2c4]:first-child {\n    left: 0;\n}\n.today > i[data-v-5c4db2c4]:last-child {\n    right: 0;\n}\n.today > i[data-v-5c4db2c4] {\n    position: absolute;\n    line-height: 50px;\n    cursor: pointer;\n    font-size: 50px;\n}\n.today > div[data-v-5c4db2c4] {\n    line-height: 50px;\n}\n\n", ""]);
 
 // exports
 
@@ -37646,6 +37759,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ItemComponent.vue?vue&type=style&index=0&id=70c3fdcf&scoped=true&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ItemComponent.vue?vue&type=style&index=0&id=70c3fdcf&scoped=true&lang=css& ***!
@@ -38338,14 +38481,40 @@ var render = function() {
               "div",
               { key: week.id, staticClass: "date-row" },
               _vm._l(week.week, function(item) {
-                return _c("div", { staticClass: "item" }, [
-                  _vm._v(_vm._s(item.number)),
-                  _vm.ifuncom(item.number) !== null
-                    ? _c("div", [_vm._v(_vm._s(_vm.ifuncom(item.number)))])
-                    : _vm._e()
-                ])
+                return _c(
+                  "router-link",
+                  { staticClass: "item", attrs: { to: "/day", tag: "div" } },
+                  [
+                    _c(
+                      "div",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.setDate(item)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(item.number) +
+                            "\n                        "
+                        ),
+                        _vm.ifuncom(item.number) !== null
+                          ? _c("div", [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.ifuncom(item.number)) +
+                                  "\n                        "
+                              )
+                            ])
+                          : _vm._e()
+                      ]
+                    )
+                  ]
+                )
               }),
-              0
+              1
             )
           }),
           0
@@ -38500,6 +38669,62 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DayInfoComponent.vue?vue&type=template&id=5c4db2c4&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DayInfoComponent.vue?vue&type=template&id=5c4db2c4&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "today" }, [
+        _c("i", { staticClass: "fas fa-caret-left", on: { click: _vm.prev } }),
+        _vm._v(" "),
+        _c("div", [_vm._v(_vm._s(this.$root.now.gondr()))]),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-caret-right", on: { click: _vm.next } })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-12" },
+        [
+          _c(
+            "transition-group",
+            { attrs: { name: "glist", tag: "div" } },
+            _vm._l(this.$root.list, function(item) {
+              return _c("item-compo", {
+                key: item.id,
+                staticClass: "my-3",
+                attrs: { item: item }
+              })
+            }),
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ItemComponent.vue?vue&type=template&id=70c3fdcf&scoped=true&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ItemComponent.vue?vue&type=template&id=70c3fdcf&scoped=true& ***!
@@ -38526,7 +38751,7 @@ var render = function() {
           _c("span", { staticClass: "day" }, [
             _vm._v(
               "\n                " +
-                _vm._s(_vm.item.date.getDate()) +
+                _vm._s(this.$root.now.getDate()) +
                 "\n            "
             )
           ])
@@ -38534,11 +38759,11 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "down" }, [
           _c("span", { staticClass: "month" }, [
-            _vm._v(_vm._s(this.monthList[_vm.item.date.getMonth()]))
+            _vm._v(_vm._s(this.$root.now.getMonth() + 1))
           ]),
           _vm._v(" "),
           _c("span", { staticClass: "year" }, [
-            _vm._v(_vm._s(_vm.item.date.getFullYear()))
+            _vm._v(_vm._s(this.$root.now.getFullYear()))
           ])
         ])
       ]),
@@ -53856,17 +54081,20 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_RegisterComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/RegisterComponent */ "./resources/js/components/RegisterComponent.vue");
-/* harmony import */ var _components_MainApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/MainApp */ "./resources/js/components/MainApp.vue");
-/* harmony import */ var _components_ItemComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ItemComponent */ "./resources/js/components/ItemComponent.vue");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_TodoComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/TodoComponent */ "./resources/js/components/TodoComponent.vue");
-/* harmony import */ var _components_CompleteComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/CompleteComponent */ "./resources/js/components/CompleteComponent.vue");
-/* harmony import */ var _components_CalendarComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/CalendarComponent */ "./resources/js/components/CalendarComponent.vue");
-/* harmony import */ var _components_DateComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/DateComponent */ "./resources/js/components/DateComponent.vue");
-/* harmony import */ var _components_DayComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/DayComponent */ "./resources/js/components/DayComponent.vue");
+/* harmony import */ var _components_DayInfoComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/DayInfoComponent */ "./resources/js/components/DayInfoComponent.vue");
+/* harmony import */ var _components_RegisterComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/RegisterComponent */ "./resources/js/components/RegisterComponent.vue");
+/* harmony import */ var _components_MainApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/MainApp */ "./resources/js/components/MainApp.vue");
+/* harmony import */ var _components_ItemComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ItemComponent */ "./resources/js/components/ItemComponent.vue");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_TodoComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/TodoComponent */ "./resources/js/components/TodoComponent.vue");
+/* harmony import */ var _components_CompleteComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/CompleteComponent */ "./resources/js/components/CompleteComponent.vue");
+/* harmony import */ var _components_CalendarComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/CalendarComponent */ "./resources/js/components/CalendarComponent.vue");
+/* harmony import */ var _components_DateComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/DateComponent */ "./resources/js/components/DateComponent.vue");
+/* harmony import */ var _components_DayComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/DayComponent */ "./resources/js/components/DayComponent.vue");
+
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -53881,29 +54109,31 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]);
-Vue.prototype.$http = axios__WEBPACK_IMPORTED_MODULE_4___default.a;
-Vue.component('register-compo', _components_RegisterComponent__WEBPACK_IMPORTED_MODULE_0__["default"]);
-Vue.component('main-app', _components_MainApp__WEBPACK_IMPORTED_MODULE_1__["default"]);
-Vue.component('item-compo', _components_ItemComponent__WEBPACK_IMPORTED_MODULE_2__["default"]);
-Vue.component('date-compo', _components_DateComponent__WEBPACK_IMPORTED_MODULE_8__["default"]);
-Vue.component('day-compo', _components_DayComponent__WEBPACK_IMPORTED_MODULE_9__["default"]);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
+Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]);
+Vue.prototype.$http = axios__WEBPACK_IMPORTED_MODULE_5___default.a;
+Vue.component('register-compo', _components_RegisterComponent__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Vue.component('main-app', _components_MainApp__WEBPACK_IMPORTED_MODULE_2__["default"]);
+Vue.component('item-compo', _components_ItemComponent__WEBPACK_IMPORTED_MODULE_3__["default"]);
+Vue.component('date-compo', _components_DateComponent__WEBPACK_IMPORTED_MODULE_9__["default"]);
+Vue.component('day-compo', _components_DayComponent__WEBPACK_IMPORTED_MODULE_10__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   routes: [{
     path: '/',
-    component: _components_TodoComponent__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _components_TodoComponent__WEBPACK_IMPORTED_MODULE_6__["default"]
   }, {
     path: '/complete',
-    component: _components_CompleteComponent__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _components_CompleteComponent__WEBPACK_IMPORTED_MODULE_7__["default"]
   }, {
     path: '/calendar',
-    component: _components_CalendarComponent__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _components_CalendarComponent__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }, {
+    path: '/day',
+    component: _components_DayInfoComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   }]
 });
 
 Date.prototype.gondr = function () {
   var str = this.toLocaleDateString();
-  console.log(str);
   var arr = str.split(".");
   return arr.filter(function (x) {
     return x != "";
@@ -53939,11 +54169,14 @@ var app = new Vue({
     dateofweek: [],
     day: new Date(),
     id: 4,
-    user: null
+    user: null,
+    now: null,
+    dayInfo: null
   },
   created: function created() {
     var _this = this;
 
+    this.now = new Date();
     this.$http.get('/check').then(function (res) {
       if (res.data.result) {
         _this.user = res.data.user;
@@ -54400,6 +54633,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayComponent_vue_vue_type_template_id_29d997a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayComponent_vue_vue_type_template_id_29d997a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/DayInfoComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/DayInfoComponent.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DayInfoComponent_vue_vue_type_template_id_5c4db2c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DayInfoComponent.vue?vue&type=template&id=5c4db2c4&scoped=true& */ "./resources/js/components/DayInfoComponent.vue?vue&type=template&id=5c4db2c4&scoped=true&");
+/* harmony import */ var _DayInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DayInfoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/DayInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _DayInfoComponent_vue_vue_type_style_index_0_id_5c4db2c4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css& */ "./resources/js/components/DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _DayInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DayInfoComponent_vue_vue_type_template_id_5c4db2c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DayInfoComponent_vue_vue_type_template_id_5c4db2c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "5c4db2c4",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DayInfoComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/DayInfoComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/DayInfoComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DayInfoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DayInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css& ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_style_index_0_id_5c4db2c4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DayInfoComponent.vue?vue&type=style&index=0&id=5c4db2c4&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_style_index_0_id_5c4db2c4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_style_index_0_id_5c4db2c4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_style_index_0_id_5c4db2c4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_style_index_0_id_5c4db2c4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_style_index_0_id_5c4db2c4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/DayInfoComponent.vue?vue&type=template&id=5c4db2c4&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/DayInfoComponent.vue?vue&type=template&id=5c4db2c4&scoped=true& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_template_id_5c4db2c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DayInfoComponent.vue?vue&type=template&id=5c4db2c4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DayInfoComponent.vue?vue&type=template&id=5c4db2c4&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_template_id_5c4db2c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayInfoComponent_vue_vue_type_template_id_5c4db2c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

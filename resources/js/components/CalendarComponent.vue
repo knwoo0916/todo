@@ -21,7 +21,14 @@
             </div>
             <transition-group name="fade">
                 <div class="date-row" v-for="week in list" :key="week.id">
-                    <div class="item" v-for="item in week.week">{{item.number}}<div v-if="ifuncom(item.number) !== null">{{ifuncom(item.number)}}</div></div>
+                    <router-link to="/day" tag="div" class="item" v-for="item in week.week">
+                        <div @click="setDate(item)">
+                            {{item.number}}
+                            <div v-if="ifuncom(item.number) !== null">
+                                {{ifuncom(item.number)}}
+                            </div>
+                        </div>
+                    </router-link>
                 </div>
             </transition-group>
         </div>
@@ -87,19 +94,21 @@
                         }
                     }
                 }
-                console.log(result);
                 return result;
             },
             null(){
                 return null;
-            }
+            },
+            setDate(item) {
+                this.$root.now = new Date(item.date);
+                this.$root.dayInfo.dateTodo();
+            },
         },
         computed: {
             uncomList() {
                 return this.$root.sortList.filter(x => x.complete == 0);
             }
         }
-
     }
 </script>
 
@@ -110,7 +119,6 @@
         grid-template-rows: 40px;
         grid-auto-rows: minmax(200px, auto);
     }
-
     .date-row {
         margin-top: 10px;
         grid-gap: 10px;
@@ -118,7 +126,6 @@
         grid-template-columns: repeat(7,1fr);
         grid-auto-rows: minmax(100px, auto);
     }
-
     .today {
         display: flex;
         justify-content: center;
@@ -151,10 +158,14 @@
         background-color: #4caf50;
         color: #fff;
     }
-
     .item {
         background-color: #fff;
         box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
         padding: 10px;
+    }
+
+    .item > div {
+        width: 100%;
+        height: 100%;
     }
 </style>

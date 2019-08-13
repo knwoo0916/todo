@@ -6,12 +6,12 @@
         <div class="date">
             <div class="up">
                 <span class="day">
-                    {{item.date.getDate()}}
+                    {{this.$root.now.getDate()}}
                 </span>
             </div>
             <div class="down">
-                <span class="month">{{this.monthList[item.date.getMonth()]}}</span>
-                <span class="year">{{item.date.getFullYear()}}</span>
+                <span class="month">{{ this.$root.now.getMonth() + 1}}</span>
+                <span class="year">{{ this.$root.now.getFullYear() }}</span>
             </div>
 
         </div>

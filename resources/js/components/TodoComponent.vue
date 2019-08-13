@@ -20,6 +20,7 @@
         name: "TodoComponent",
         computed: {
             uncomList() {
+
                 return this.$root.sortList.filter(x => x.complete == 0);
             }
         }
